@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hospital_portal/screens/Homepage.dart';
+import 'package:hospital_portal/screens/Verification.dart';
+import 'package:hospital_portal/screens/Hospital.dart';
+
 
 class Registration extends StatefulWidget {
   static const String id = 'registration';
@@ -10,7 +14,7 @@ class _RegistrationState extends  State<Registration>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Home'),centerTitle: true,
+        appBar: AppBar(title: Text('Registration'),centerTitle: true,
         ),
         drawer: Drawer(child: ListView(
           padding: EdgeInsets.zero,
@@ -20,7 +24,7 @@ class _RegistrationState extends  State<Registration>{
                 color: Color(0xFF01579B),
               ),
               child: Text(
-                'Home',
+                'Register',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 36,
@@ -28,10 +32,10 @@ class _RegistrationState extends  State<Registration>{
               ),
             ),
             ListTile(
-              leading: Icon(Icons.border_color),
-              title: Text('Register'),
+              leading: Icon(Icons.home),
+              title: Text('Home'),
               onTap: () {
-                Navigator.pushNamed(context, Registration.id);
+                Navigator.pushNamed(context, Homepage.id);
               },
             ),
             ListTile(

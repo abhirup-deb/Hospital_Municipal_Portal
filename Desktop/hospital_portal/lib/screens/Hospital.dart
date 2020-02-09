@@ -12,7 +12,7 @@ class Hospital extends StatefulWidget {
 class _HospitalState extends  State<Hospital>{
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text('Home'),centerTitle: true,
+    return Scaffold(appBar: AppBar(title: Text('Hospital'),centerTitle: true,
     ),
         drawer: Drawer(child: ListView(
           padding: EdgeInsets.zero,
@@ -22,7 +22,7 @@ class _HospitalState extends  State<Hospital>{
                 color: Color(0xFF01579B),
               ),
               child: Text(
-                'Home',
+                'Hospital',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 36,
