@@ -12,7 +12,7 @@ class Hospital extends StatefulWidget {
 class _HospitalState extends  State<Hospital>{
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text('Hospital'),centerTitle: true,
+    return Scaffold(appBar: AppBar(title: Text('Hospital'),
     ),
         drawer: Drawer(child: ListView(
           padding: EdgeInsets.zero,

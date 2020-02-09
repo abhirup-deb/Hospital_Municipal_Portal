@@ -3,7 +3,6 @@ import 'package:hospital_portal/screens/Homepage.dart';
 import 'package:hospital_portal/screens/Hospital.dart';
 import 'package:hospital_portal/screens/Verification.dart';
 import 'package:hospital_portal/screens/Registration.dart';
-import 'package:hospital_portal/ThemeSelect.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,10 +13,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      darkTheme: ThemeData.dark(),
-      theme: ThemeData.light(
+      theme: ThemeData.dark(
       ),
-      home: Homepage(),
       initialRoute: Homepage.id,
       routes: {
         Homepage.id: (context) => Homepage(),

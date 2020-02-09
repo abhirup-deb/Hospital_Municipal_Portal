@@ -14,7 +14,7 @@ class _VerificationState extends  State<Verification>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Verification'),centerTitle: true,
+        appBar: AppBar(title: Text('Verification'),
         ),
         drawer: Drawer(child: ListView(
           padding: EdgeInsets.zero,
