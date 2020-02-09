@@ -11,15 +11,6 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends  State<Homepage>{
 
-  call_page(int value){
-    if(value==1)
-
-    if(value==2)
-      Navigator.pushNamed(context, Verification.id);
-    if(value==3)
-      Navigator.pushNamed(context, Hospital.id);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
