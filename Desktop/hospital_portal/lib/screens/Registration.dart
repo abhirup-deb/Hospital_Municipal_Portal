@@ -145,7 +145,22 @@ class _RegistrationState extends  State<Registration>{
                     }
                   });
                   if(_validate1==false && _validate2==false && _validate3==false && digit==true){
-                    Navigator.pushNamed(context,C_Signin.id);
+                    Flushbar(
+                      message: "Registered Successfully",
+                      icon: Icon(
+                        Icons.event_available,
+                        size: 20.0,
+                        color: Colors.green[800],
+                      ),
+                      duration: Duration(seconds: 2),
+                      leftBarIndicatorColor: Colors.green[700],
+                    )..show(context);
+
+                    Future.delayed(const Duration(seconds: 3), () {
+                      setState(() {
+                        Navigator.pushNamed(context, Homepage.id);
+                      });
+                    });
                   }
                 },
                   child: Text('Register',style: TextStyle(fontSize: 20.0),),color: Colors.teal,elevation: 7.0,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(38.0),),),

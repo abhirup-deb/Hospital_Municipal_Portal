@@ -11,10 +11,26 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends  State<Homepage>{
 
+  TimeOfDay now;
+
+  ThemeMode time_color(){
+    now= TimeOfDay.now();
+    if(now.toString().compareTo('1700')>0){
+      return ThemeMode.dark;
+    }
+    else{
+      return ThemeMode.light;
+    }
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Home'),centerTitle: true,
+      appBar: AppBar(title: Text('Home'),actions: <Widget>[IconButton(icon: Icon(Icons.invert_colors), onPressed: (){
+        time_color();
+      })],
       ),
       drawer: Drawer(child: ListView(
         padding: EdgeInsets.zero,
