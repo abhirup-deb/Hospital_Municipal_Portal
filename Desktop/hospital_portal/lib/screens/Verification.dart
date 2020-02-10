@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hospital_portal/screens/Homepage.dart';
 import 'package:hospital_portal/screens/Hospital.dart';
 import 'package:hospital_portal/screens/Registration.dart';
-
+import 'package:flushbar/flushbar.dart';
 
 class Verification extends StatefulWidget {
   static const String id = 'verification';
@@ -11,6 +11,19 @@ class Verification extends StatefulWidget {
 }
 
 class _VerificationState extends  State<Verification>{
+
+  bool _validate1 = false;
+  bool _validate2 = false;
+  final _aadhar = TextEditingController();
+  final _register = TextEditingController();
+
+  @override
+  void dispose() {
+    _aadhar.dispose();
+    _register.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +67,71 @@ class _VerificationState extends  State<Verification>{
               },
             ),
           ],
-        ),)
+        ),
+        ),
+        body: Center(
+          child: Container(
+            padding: EdgeInsets.all(8.0),
+            height: 450.0,
+            width: 350.0,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(27.0),color: Colors.black12),
+            child: ListView(
+
+              children: <Widget>[
+
+                SizedBox(
+                  height: 3.0,
+                ),
+                Container(height: 90.0,width:240.0,
+                    child: TextField(style: TextStyle(color: Colors.white70),controller:_aadhar,textAlign: TextAlign.center,decoration: InputDecoration(
+                      hintText: 'Enter Your Aadhar Number',hintStyle: TextStyle(color: Colors.blueGrey,),errorText: _validate1?"Please Fill up this Field":null,
+                    ),)),
+                SizedBox(
+                  height: 3.0,
+                ),
+                Container(height: 90.0,width:240.0,
+                    child: TextField(style: TextStyle(color: Colors.white70),controller: _register,keyboardType: TextInputType.emailAddress,textAlign: TextAlign.center,decoration: InputDecoration(
+                      hintText: 'Enter Your Registration Number',hintStyle: TextStyle(color: Colors.blueGrey),errorText: _validate2?"Please Fill up this Field":null,
+                    ),)),
+                SizedBox(
+                  height: 3.0,
+                ),
+
+
+
+                SizedBox(height: 4.0,),
+                Center(
+                  child: RaisedButton(onPressed: (){
+                    setState(() {
+                      _aadhar.text.isEmpty?_validate1=true:_validate1=false;
+                      _register.text.isEmpty?_validate2=true:_validate2=false;
+
+                    });
+                    if(_validate1==false && _validate2==false){
+                      Flushbar(
+                        message: "Your Details will be Verified soon",
+                        icon: Icon(
+                          Icons.verified_user,
+                          size: 20.0,
+                          color: Colors.green[800],
+                        ),
+                        duration: Duration(seconds: 2),
+                        leftBarIndicatorColor: Colors.green[700],
+                      )..show(context);
+
+                      Future.delayed(const Duration(seconds: 3), () {
+                        setState(() {
+                          Navigator.pushNamed(context, Homepage.id);
+                        });
+                      });
+                    }
+                  },
+                    child: Text('Verify',style: TextStyle(fontSize: 20.0),),color: Colors.orangeAccent,elevation: 7.0,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(38.0),),),
+                ),
+              ],
+            ),
+          ),
+        ),
     );
   }
 }
