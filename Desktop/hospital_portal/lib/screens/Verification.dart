@@ -3,6 +3,7 @@ import 'package:hospital_portal/screens/Homepage.dart';
 import 'package:hospital_portal/screens/Hospital.dart';
 import 'package:hospital_portal/screens/Registration.dart';
 import 'package:flushbar/flushbar.dart';
+import 'package:file_picker/file_picker.dart';
 
 class Verification extends StatefulWidget {
   static const String id = 'verification';
@@ -16,6 +17,8 @@ class _VerificationState extends  State<Verification>{
   bool _validate2 = false;
   final _aadhar = TextEditingController();
   final _register = TextEditingController();
+  String filePath;
+
 
   @override
   void dispose() {
@@ -23,6 +26,10 @@ class _VerificationState extends  State<Verification>{
     _register.dispose();
     super.dispose();
   }
+ Certi() async {
+   filePath = await FilePicker.getFilePath(type:FileType.ANY);
+   print(filePath);
+}
 
   @override
   Widget build(BuildContext context) {
@@ -73,14 +80,21 @@ class _VerificationState extends  State<Verification>{
           child: Container(
             padding: EdgeInsets.all(8.0),
             height: 450.0,
-            width: 350.0,
+            width: 330.0,
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(27.0),color: Colors.black12),
             child: ListView(
 
               children: <Widget>[
+                Text('Upload Your Certificate for Verification below',textAlign: TextAlign.center,style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.w600),),
+                SizedBox(
+                  height: 10.0,
+                ),
+                FlatButton(color:Colors.blue,onPressed: (){
+                  Certi();
+                  }, child: Text('Upload',style: TextStyle(fontSize: 16.0),)),
 
                 SizedBox(
-                  height: 3.0,
+                  height: 34.0,
                 ),
                 Container(height: 90.0,width:240.0,
                     child: TextField(style: TextStyle(color: Colors.white70),controller:_aadhar,textAlign: TextAlign.center,decoration: InputDecoration(
