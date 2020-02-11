@@ -4,6 +4,7 @@ import 'package:hospital_portal/screens/Hospital.dart';
 import 'package:hospital_portal/screens/Registration.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:hospital_portal/screens/After_verif.dart';
 
 class Verification extends StatefulWidget {
   static const String id = 'verification';
@@ -135,7 +136,7 @@ class _VerificationState extends  State<Verification>{
 
                       Future.delayed(const Duration(seconds: 3), () {
                         setState(() {
-                          Navigator.pushNamed(context, Homepage.id);
+                          Navigator.pushNamed(context, After_verif.id);
                         });
                       });
                     }

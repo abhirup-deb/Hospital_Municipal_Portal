@@ -3,6 +3,7 @@ import 'package:hospital_portal/screens/Homepage.dart';
 import 'package:hospital_portal/screens/Hospital.dart';
 import 'package:hospital_portal/screens/Verification.dart';
 import 'package:hospital_portal/screens/Registration.dart';
+import 'package:hospital_portal/screens/After_verif.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         Verification.id: (context) => Verification(),
         Registration.id: (context) => Registration(),
         Hospital.id: (context) => Hospital(),
+        After_verif.id: (context) => After_verif(),
       },
     );
   }
