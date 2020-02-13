@@ -2,12 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class After_verif extends StatefulWidget{
+  final bool tag;
+  const After_verif({Key key,this.tag}): super(key:key);
   static const String id = 'After_verif';
   _After_verifState createState() => _After_verifState();
 }
 
 class _After_verifState extends State<After_verif>{
-  bool datafound = true;
+  bool datafound = After_verif().tag;
   IconData _icon;
   String _txt;
   Color _clr;

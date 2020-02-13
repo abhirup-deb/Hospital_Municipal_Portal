@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
-
+import 'package:flutter_otp/flutter_otp.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:hospital_portal/screens/After_verif.dart';
 
 
 
 class otp extends StatefulWidget{
-  final bool tag;
-  const otp({Key key,this.tag}): super(key:key);
   static const String id = 'otp';
 
 
@@ -27,6 +25,8 @@ class _otpState extends State<otp>{
   final FocusNode _focus5 = new FocusNode();
   final FocusNode _focus6 = new FocusNode();
 
+  bool datafound = true; //value recieved from sql server
+
 
 
   @override
@@ -40,16 +40,14 @@ class _otpState extends State<otp>{
   }
 
   @override
-  Widget Result(String newOTP,int tag){
+  Widget Result(String newOTP){
     print(newOTP);
     if(newOTP == _otp.toString()){
       print('Success');
-      if(tag==true)
-        Navigator.pushNamed(context,After_verif.id );
-      else if(tag==1)
-        Navigator.pushNamed(context, PolicyMaker.id);
+      if(datafound==true)
+        Navigator.of(context).push(MaterialPageRoute(builder: (_) => new After_verif(tag: true),));
       else
-        Navigator.pushNamed(context, User.id);
+        Navigator.of(context).push(MaterialPageRoute(builder: (_) => new After_verif(tag: false),));
     }
     else{print('Failure');
 
@@ -172,7 +170,7 @@ class _otpState extends State<otp>{
 
               RaisedButton(onPressed: (){
                 setState(() {
-                  Result(_notp,widget.tag);
+                  Result(_notp);
                 });
               },
                 child: Text('Done',style: TextStyle(fontSize: 20.0,),),color: Colors.green,elevation: 7.0,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(38.0),),),

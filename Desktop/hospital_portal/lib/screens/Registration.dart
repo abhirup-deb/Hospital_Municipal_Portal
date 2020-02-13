@@ -23,6 +23,11 @@ class _RegistrationState extends  State<Registration>{
   final _num = TextEditingController();
   final _add = TextEditingController();
 
+  var databasesPath = await getDatabasesPath();
+  static String path = join(databasesPath, 'demo.db');
+  var db = await openDatabase(path);
+
+
   @override
   void dispose() {
     _name.dispose();
@@ -159,6 +164,11 @@ class _RegistrationState extends  State<Registration>{
 
                     Future.delayed(const Duration(seconds: 3), () {
                       setState(() {
+                         await database.transaction((txn) async {
+                         int id1 = await txn.rawInsert(
+                         'INSERT INTO Test(name, value, num) VALUES("some name", 1234, 456.789)');
+                         print('inserted1: $id1');
+
                         Navigator.pushNamed(context, Homepage.id);
                       });
                     });
