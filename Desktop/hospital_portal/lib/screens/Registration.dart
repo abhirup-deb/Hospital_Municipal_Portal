@@ -3,6 +3,7 @@ import 'package:hospital_portal/screens/Homepage.dart';
 import 'package:hospital_portal/screens/Verification.dart';
 import 'package:hospital_portal/screens/Hospital.dart';
 import 'package:flushbar/flushbar.dart';
+import 'package:sqflite/sqflite.dart';
 
 
 class Registration extends StatefulWidget {

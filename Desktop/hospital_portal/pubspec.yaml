@@ -24,6 +24,7 @@ dependencies:
   flushbar: ^1.9.1
   file_picker: ^1.4.3
   flappy_search_bar: ^1.7.2
+  sqflite: ^1.2.0
 
 
 dev_dependencies:
