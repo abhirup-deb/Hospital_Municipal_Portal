@@ -3,6 +3,9 @@ import 'dart:math';
 import 'package:flutter_otp/flutter_otp.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:hospital_portal/screens/After_verif.dart';
+import 'package:path/path.dart' as p;
+import 'package:sqflite/sqflite.dart';
+import 'package:hospital_portal/screens/Registration.dart';
 
 
 
@@ -27,14 +30,17 @@ class _otpState extends State<otp>{
 
   bool datafound = true; //value recieved from sql server
 
-  var databasesPath = await getDatabasesPath();
-  String path = p.join(databasesPath, 'demo.db');
 
 
 
   @override
-  void initState() {
-    String phno = '9830818161';
+  void initState() async{
+    var databasesPath = await getDatabasesPath();
+    String path = p.join(databasesPath, 'demo.db');
+    var db = await openDatabase(path);
+
+
+    String phno = await db.rawQuery('SELECT Contact FROM INSERT WHERE Aadhar = Registration()._aadhar');
     _otp = 100000 + Random().nextInt(799999 - 10000);
     print(_otp);
     String mssg = "Your OTP is : $_otp";
