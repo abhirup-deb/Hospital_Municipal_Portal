@@ -4,8 +4,9 @@ import 'package:hospital_portal/screens/Hospital.dart';
 import 'package:hospital_portal/screens/Registration.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:hospital_portal/screens/After_verif.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:hospital_portal/screens/otp.dart';
+import 'package:path/path.dart' as p;
 
 class Verification extends StatefulWidget {
   static const String id = 'verification';
@@ -124,6 +125,19 @@ class _VerificationState extends  State<Verification>{
 
                     });
                     if(_validate1==false && _validate2==false){
+
+                      setState(() async {
+                        var databasesPath = await getDatabasesPath();
+                        String path = p.join(databasesPath, 'demo.db');
+                        var db = await openDatabase(path);
+
+
+                        await db.transaction((txn) async {
+                        int id1 = await txn.rawInsert('INSERT (Name, Aadhar, Email, Contact, Address) VALUES(_name, _aadhar, _email, _num, _add)');
+                        print(id1);
+                        });
+                        await db.close();
+                      });
                       Flushbar(
                         message: "Your Details will be Verified soon",
                         icon: Icon(

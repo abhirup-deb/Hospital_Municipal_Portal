@@ -27,6 +27,9 @@ class _otpState extends State<otp>{
 
   bool datafound = true; //value recieved from sql server
 
+  var databasesPath = await getDatabasesPath();
+  String path = p.join(databasesPath, 'demo.db');
+
 
 
   @override

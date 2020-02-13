@@ -159,6 +159,7 @@ class _RegistrationState extends  State<Registration>{
                         int id1 = await txn.rawInsert('INSERT (Name, Aadhar, Email, Contact, Address) VALUES(_name, _aadhar, _email, _num, _add)');
                         print(id1);
                       });
+                      await db.close();
                     });
 
 
