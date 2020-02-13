@@ -4,6 +4,7 @@ import 'package:hospital_portal/screens/Verification.dart';
 import 'package:hospital_portal/screens/Hospital.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart' as p;
 
 
 class Registration extends StatefulWidget {
@@ -23,9 +24,6 @@ class _RegistrationState extends  State<Registration>{
   final _num = TextEditingController();
   final _add = TextEditingController();
 
-  var databasesPath = await getDatabasesPath();
-  static String path = join(databasesPath, 'demo.db');
-  var db = await openDatabase(path);
 
 
   @override
@@ -151,6 +149,19 @@ class _RegistrationState extends  State<Registration>{
                     }
                   });
                   if(_validate1==false && _validate2==false && _validate3==false && digit==true){
+                    setState(()async {
+                      var databasesPath = await getDatabasesPath();
+                      String path = p.join(databasesPath, 'demo.db');
+                      var db = await openDatabase(path);
+
+
+                      await db.transaction((txn) async {
+                        int id1 = await txn.rawInsert('INSERT (Name, Aadhar, Email, Contact, Address) VALUES(_name, _aadhar, _email, _num, _add)');
+                        print(id1);
+                      });
+                    });
+
+
                     Flushbar(
                       message: "Registered Successfully",
                       icon: Icon(
@@ -164,11 +175,6 @@ class _RegistrationState extends  State<Registration>{
 
                     Future.delayed(const Duration(seconds: 3), () {
                       setState(() {
-                         await database.transaction((txn) async {
-                         int id1 = await txn.rawInsert(
-                         'INSERT INTO Test(name, value, num) VALUES("some name", 1234, 456.789)');
-                         print('inserted1: $id1');
-
                         Navigator.pushNamed(context, Homepage.id);
                       });
                     });
