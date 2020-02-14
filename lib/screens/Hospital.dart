@@ -1,10 +1,19 @@
+import 'package:flappy_search_bar/scaled_tile.dart';
+import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';
 import 'package:hospital_portal/screens/Homepage.dart';
 import 'package:hospital_portal/screens/Verification.dart';
 import 'package:hospital_portal/screens/Registration.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:simple_search_bar/simple_search_bar.dart';
+import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:path/path.dart' as p;
+
+class Post {
+  final String title;
+  final String description;
+
+  Post(this.title, this.description);
+}
 
 class Hospital extends StatefulWidget {
   static const String id = 'hospital';
@@ -12,8 +21,20 @@ class Hospital extends StatefulWidget {
   _HospitalState createState() => _HospitalState();
 }
 
+@override
+Future<List<Post>> search(String search) async {
+  await Future.delayed(Duration(seconds: 2));
+  if (search == "empty") return [];
+  if (search == "error") throw Error();
+  return List.generate(search.length, (int index) {
+    return Post(
+      "Title : $search $index",
+      "Description :$search $index",
+    );
+  });
+}
+
 class _HospitalState extends  State<Hospital>{
-  AppBarController appBarController;
 
   @override
   Widget build(BuildContext context) {
@@ -60,31 +81,42 @@ class _HospitalState extends  State<Hospital>{
 
           ],
         ),),
-      body: SearchAppBar(primary: Theme.of(context).primaryColor,
-        appBarController: appBarController,
-        // You could load the bar with search already active
-        autoSelected: true,
-        searchHint: "Pesquise aqui...",
-        mainTextColor: Colors.white,
-        onChange: (String value) {
-          //Your function to filter list. It should interact with
-          //the Stream that generate the final list
-        },
-        //Will show when SEARCH MODE wasn't active
-        mainAppBar: AppBar(
-          title: Text("Yout Bar Title"),
-          actions: <Widget>[
-            InkWell(
-              child: Icon(
-                Icons.search,
-              ),
-              onTap: () {
-                //This is where You change to SEARCH MODE. To hide, just
-                //add FALSE as value on the stream
-                appBarController.stream.add(true);
-              },
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: SearchBar<Post>(
+            textStyle: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
             ),
-          ],
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            hintText: "Enter your Name here..",
+            hintStyle: TextStyle(
+              color: Colors.grey[100],
+            ),
+            debounceDuration: Duration(milliseconds: 800),
+            minimumChars: 5,
+            crossAxisCount: 2,
+            indexedScaledTileBuilder: (int index) => ScaledTile.count(
+              index % 3 == 0 ? 2 : 1,
+              1,
+            ),
+            cancellationWidget: Text("ok"),
+            loader: Center(child: Text('Loading.....')),
+            searchBarStyle: SearchBarStyle(
+              backgroundColor: Colors.white70,
+              padding: EdgeInsets.all(5),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            onSearch: search,
+            onItemFound: (Post post, int index) {
+              return ListTile(
+                title: Text(post.title),
+                subtitle: Text(post.description),
+              );
+            },
+          ),
         ),
       ),
     );
