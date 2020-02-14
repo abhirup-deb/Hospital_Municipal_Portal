@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hospital_portal/screens/Homepage.dart';
 import 'package:hospital_portal/screens/Verification.dart';
 import 'package:hospital_portal/screens/Registration.dart';
-
-import 'package:flappy_search_bar/flappy_search_bar.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:simple_search_bar/simple_search_bar.dart';
+import 'package:path/path.dart' as p;
 
 class Hospital extends StatefulWidget {
   static const String id = 'hospital';
@@ -12,7 +13,7 @@ class Hospital extends StatefulWidget {
 }
 
 class _HospitalState extends  State<Hospital>{
-  SearchBarController _searchBarController;
+  AppBarController appBarController;
 
   @override
   Widget build(BuildContext context) {
@@ -59,61 +60,31 @@ class _HospitalState extends  State<Hospital>{
 
           ],
         ),),
-      body: SafeArea(
-        child: SearchBar<Post>(
-          searchBarPadding: EdgeInsets.symmetric(horizontal: 10),
-          headerPadding: EdgeInsets.symmetric(horizontal: 10),
-          listPadding: EdgeInsets.symmetric(horizontal: 10),
-          onSearch: _getALlPosts,
-          searchBarController: _searchBarController,
-          placeHolder: Text("placeholder"),
-          cancellationWidget: Text("Cancel"),
-          emptyWidget: Text("empty"),
-          indexedScaledTileBuilder: (int index) => ScaledTile.count(1, index.isEven ? 2 : 1),
-          header: Row(
-            children: <Widget>[
-              RaisedButton(
-                child: Text("sort"),
-                onPressed: () {
-                  _searchBarController.sortList((Post a, Post b) {
-                    return a.body.compareTo(b.body);
-                  });
-                },
+      body: SearchAppBar(primary: Theme.of(context).primaryColor,
+        appBarController: appBarController,
+        // You could load the bar with search already active
+        autoSelected: true,
+        searchHint: "Pesquise aqui...",
+        mainTextColor: Colors.white,
+        onChange: (String value) {
+          //Your function to filter list. It should interact with
+          //the Stream that generate the final list
+        },
+        //Will show when SEARCH MODE wasn't active
+        mainAppBar: AppBar(
+          title: Text("Yout Bar Title"),
+          actions: <Widget>[
+            InkWell(
+              child: Icon(
+                Icons.search,
               ),
-              RaisedButton(
-                child: Text("Desort"),
-                onPressed: () {
-                  _searchBarController.removeSort();
-                },
-              ),
-              RaisedButton(
-                child: Text("Replay"),
-                onPressed: () {
-                  isReplay = !isReplay;
-                  _searchBarController.replayLastSearch();
-                },
-              ),
-            ],
-          ),
-          onCancelled: () {
-            print("Cancelled triggered");
-          },
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          crossAxisCount: 2,
-          onItemFound: (Post post, int index) {
-            return Container(
-              color: Colors.lightBlue,
-              child: ListTile(
-                title: Text(post.title),
-                isThreeLine: true,
-                subtitle: Text(post.body),
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => Detail()));
-                },
-              ),
-            );
-          },
+              onTap: () {
+                //This is where You change to SEARCH MODE. To hide, just
+                //add FALSE as value on the stream
+                appBarController.stream.add(true);
+              },
+            ),
+          ],
         ),
       ),
     );

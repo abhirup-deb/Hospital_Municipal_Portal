@@ -28,19 +28,15 @@ class _otpState extends State<otp>{
   final FocusNode _focus5 = new FocusNode();
   final FocusNode _focus6 = new FocusNode();
 
-  bool datafound = true; //value recieved from sql server
+
 
 
 
 
   @override
-  void initState() async{
-    var databasesPath = await getDatabasesPath();
-    String path = p.join(databasesPath, 'demo.db');
-    var db = await openDatabase(path);
+  void initState() {
 
-
-    String phno = await db.rawQuery('SELECT Contact FROM INSERT WHERE Aadhar = Registration()._aadhar');
+    String phno = '9002342503';// value received from sql server
     _otp = 100000 + Random().nextInt(799999 - 10000);
     print(_otp);
     String mssg = "Your OTP is : $_otp";
@@ -53,10 +49,8 @@ class _otpState extends State<otp>{
     print(newOTP);
     if(newOTP == _otp.toString()){
       print('Success');
-      if(datafound==true)
-        Navigator.of(context).push(MaterialPageRoute(builder: (_) => new After_verif(tag: true),));
-      else
-        Navigator.of(context).push(MaterialPageRoute(builder: (_) => new After_verif(tag: false),));
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) => new After_verif(),));
+
     }
     else{print('Failure');
 

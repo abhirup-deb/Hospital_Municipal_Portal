@@ -1,15 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hospital_portal/screens/Homepage.dart';
 
 class After_verif extends StatefulWidget{
-  final bool tag;
-  const After_verif({Key key,this.tag}): super(key:key);
   static const String id = 'After_verif';
   _After_verifState createState() => _After_verifState();
 }
 
 class _After_verifState extends State<After_verif>{
-  bool datafound = After_verif().tag;
+  bool datafound = true; //value recieved from sql server
   IconData _icon;
   String _txt;
   Color _clr;
@@ -17,7 +16,7 @@ class _After_verifState extends State<After_verif>{
 
   void initState() {
 
-    if(datafound==false){
+    if(datafound==true){
       _icon = Icons.verified_user;
       _clr = Colors.green;
       _txt = 'You have been Verified. Congratulations 😊';
@@ -25,7 +24,7 @@ class _After_verifState extends State<After_verif>{
     else{
       _icon = Icons.info;
       _clr = Colors.red[800];
-      _txt = 'Error';
+      _txt = 'Error, Data not Verified';
     }
     super.initState();
 
@@ -35,6 +34,7 @@ class _After_verifState extends State<After_verif>{
   @override
   Widget build (BuildContext context) {
     return Scaffold(
+      appBar: AppBar(leading: Container(child: IconButton(icon: Icon(Icons.home), onPressed: () => Navigator.pushNamed(context, Homepage.id))),),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
