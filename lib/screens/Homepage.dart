@@ -54,7 +54,11 @@ class _HomepageState extends  State<Homepage>{
             },
           ),
         ],
-      ),)
+      ),),
+        body: Container(decoration: BoxDecoration(
+    image: DecorationImage(image: AssetImage("images/ui.png"),
+    fit: BoxFit.cover,colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.74), BlendMode.dstATop),
+    )),)
 
     );
   }
