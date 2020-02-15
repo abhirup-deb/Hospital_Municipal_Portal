@@ -15,7 +15,15 @@ class Post {
   Post(this.title, this.description);
 }
 
-Container
+Container HospitalList({String txt}){
+  return Container(margin: EdgeInsets.all(10.0),
+    decoration: BoxDecoration(border: Border(
+      bottom: BorderSide( //                   <--- left side
+        color: Colors.blueGrey,
+        width: 3.0,
+      ),),),
+    child: Text(txt,style: TextStyle(fontSize: 18.0),),);
+}
 
 class Hospital extends StatefulWidget {
   static const String id = 'hospital';
@@ -137,45 +145,14 @@ class _HospitalState extends  State<Hospital>{
             ),
             child: ListView(children: <Widget>[
 
-              Container(margin: EdgeInsets.all(10.0),
-                decoration: BoxDecoration(border: Border(
-                  bottom: BorderSide( //                   <--- left side
-                    color: Colors.blueGrey,
-                    width: 3.0,
-                  ),),),
-                child: Text("💉     Peerless Hospital ",style: TextStyle(fontSize: 18.0),),),
+              HospitalList(txt: "💉     AMRI Hospital, Dhakuria"),
+              HospitalList(txt: "💉     Peerless Hospital "),
+              HospitalList(txt: "💉     Fortis Hospital "),
+              HospitalList(txt: "💉     Woodlands "),
+              HospitalList(txt: "💉     Ruby General Hospital "),
+              HospitalList(txt: "💉     Command Hospital "),
 
-              Container(margin: EdgeInsets.all(10.0),
-                decoration: BoxDecoration(border: Border(
-                  bottom: BorderSide( //                   <--- left side
-                    color: Colors.blueGrey,
-                    width: 3.0,
-                  ),),),
-                child: Text("💉     Fortis Hospital ",style: TextStyle(fontSize: 18.0),),),
 
-              Container(margin: EdgeInsets.all(10.0),
-                decoration: BoxDecoration(border: Border(
-                  bottom: BorderSide( //                   <--- left side
-                    color: Colors.blueGrey,
-                    width: 3.0,
-                  ),),),
-                child: Text("💉     Woodlands ",style: TextStyle(fontSize: 18.0),),),
-
-              Container(margin: EdgeInsets.all(10.0),
-                decoration: BoxDecoration(border: Border(
-                  bottom: BorderSide( //                   <--- left side
-                    color: Colors.blueGrey,
-                    width: 3.0,
-                  ),),),
-                child: Text("💉     Ruby General Hospital ",style: TextStyle(fontSize: 18.0),),),
-
-              Container(margin: EdgeInsets.all(10.0),
-                decoration: BoxDecoration(border: Border(
-                  bottom: BorderSide( //                   <--- left side
-                    color: Colors.blueGrey,
-                    width: 3.0,
-                  ),),),
-                child: Text("💉     Command Hospital ",style: TextStyle(fontSize: 18.0),),),
           ],
           ),
             
