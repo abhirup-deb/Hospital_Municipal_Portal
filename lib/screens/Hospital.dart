@@ -91,7 +91,7 @@ class _HospitalState extends  State<Hospital>{
 
           ],
         ),),
-      body: Column(
+      body: ListView(
         children: <Widget>[
           Container(
             height: 200.0,
