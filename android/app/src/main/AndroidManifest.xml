@@ -8,7 +8,7 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="municipality_portal"
+        android:label="Municipality Portal"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
